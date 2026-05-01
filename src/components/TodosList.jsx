@@ -27,30 +27,11 @@ import { TodosContext } from "../TodosContext.js";
 function TodosList() {
   const store = useContext(TodosContext);
 
-  // const [todos, setTodos] = useState(initialTodos);
-
-  function deleteHandler(id) {
-      store.dispatch({
-        type: 'deleted',
-        id: id
-      });
-  }
-  function toggleIsDoneHandler(id) {
-      store.dispatch({
-        type: 'toggleIsDone',
-        id: id
-      });
-  }
   return (
     <>
       <div className="todos">
         {store.todos.map((todo) => (
-          <Todo
-            deleteTodo={(id) => deleteHandler(id)}
-            toggleIsDone={(id) => toggleIsDoneHandler(id)}
-            todo={todo}
-            key={todo.id}
-          />
+          <Todo todo={todo} key={todo.id} />
         ))}
       </div>
     </>

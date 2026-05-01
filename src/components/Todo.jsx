@@ -1,17 +1,26 @@
 import "./Todo.scss";
 
-function Todo({ todo, deleteTodo, toggleIsDone }) {
+function Todo({ todo }) {
   return (
     <>
       <div className={`todo ${todo.isDone ? "done" : ""}`}>
-        <button onClick={() => deleteTodo(todo.id)} className="erase">
+
+        <button 
+        onClick={() => store.dispatch({
+        type: 'deleted',
+        id: todo.id
+      })} 
+        className="erase">
           x erase
         </button>
         <h3>{todo.title}</h3>
         <p>{todo.description}</p>
         <div className="task-check">
           <input
-            onClick={() => toggleIsDone(todo.id)}
+            onClick={() =>  store.dispatch({
+            type: 'toggleIsDone',
+            id: id
+              })}
             type="checkbox"
             defaultChecked={todo.isDone}
           />
