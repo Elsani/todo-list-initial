@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Todo from "./Todo";
-import { useContext } from "react";
-import { TodosContext } from "../TodosContext.js";
+import { useTodos } from "../TodosContext.jsx";
 
 // const initialTodos = [
 //   {
@@ -25,7 +24,7 @@ import { TodosContext } from "../TodosContext.js";
 // ];
 
 function TodosList() {
-  const store = useContext(TodosContext);
+  const store = useTodos();
 
   return (
     <>
