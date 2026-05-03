@@ -29,6 +29,18 @@ export function TodosProvider({ children }) {
 
   const [filterBy, setFilterBy] = useState("");
 
+  function filteredTodos() {
+    switch (filterBy) {
+      case "todo":
+        return todos.filter((todo) => !todo.isDone);
+      case "done":
+        return todos.filter((todo) => todo.isDone);
+
+      default:
+        return todos;
+    }
+  }
+
   return (
     <>
       <main>
@@ -39,7 +51,8 @@ export function TodosProvider({ children }) {
             modalIsActive,
             setModalIsActive,
             filterBy,
-            setFilterBy
+            setFilterBy,
+            filteredTodos
           }}
         >
           {children}
