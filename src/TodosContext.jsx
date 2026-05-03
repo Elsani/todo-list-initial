@@ -27,6 +27,8 @@ export function TodosProvider({ children }) {
 
   const [modalIsActive, setModalIsActive] = useState(false);
 
+  const [filterBy, setFilterBy] = useState("");
+
   return (
     <>
       <main>
@@ -35,7 +37,9 @@ export function TodosProvider({ children }) {
             todos,
             dispatch,
             modalIsActive,
-            setModalIsActive
+            setModalIsActive,
+            filterBy,
+            setFilterBy
           }}
         >
           {children}
@@ -50,7 +54,6 @@ export function useTodos() {
 }
 
 function todosReducer(todos, action) {
-
   switch (action.type) {
     case "deleted": {
       if (confirm("Are you sure you want to delete the to-do?")) {
@@ -59,10 +62,13 @@ function todosReducer(todos, action) {
     }
 
     case "added": {
-        return todos.push(newTodo);
-      }
+      let newTodo = action.newTodo;
+      newTodo.id = todos.length
+        ? Math.max(...todos.map((todo) => todo.id)) + 1
+        : 1;
+      console.log(newTodo);
+      return [...todos, newTodo];
     }
-
 
     case "toggleIsDone": {
       return todos.map((todo) => {
